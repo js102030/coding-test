@@ -5,10 +5,8 @@ class Solution {
         int countY = 0;
         for (char c : charArray) {
             switch (c){
-                case 'p' -> ++countP;
-                case 'P' -> ++countP;
-                case 'y' -> ++countY;
-                case 'Y' -> ++countY;
+                case 'p', 'P' -> ++countP;
+                case 'y', 'Y' -> ++countY;
             }
         }
 
