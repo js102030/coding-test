@@ -1,6 +1,6 @@
 class Solution {
     public int[] solution(int brown, int yellow) {
-        for (int w = 3; w <= 5000; w++) {
+        for (int w = 3; w <= 2500; w++) {
             for (int h = 3; h <= w; h++) {
                 int boundary = (w + h - 2) * 2;
                 int center = w * h - boundary;
