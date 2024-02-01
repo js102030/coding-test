@@ -4,13 +4,14 @@ class Solution {
         Stack<Character> st = new Stack<>();
         char[] charArray = s.toCharArray();
         for (char c : charArray) {
-            try {
-                switch (c) {
-                    case '(' -> st.push(c);
-                    case ')' -> st.pop();
+            if (c == '(') {
+                st.push(c);
+            } else if (c == ')') {
+                if (st.isEmpty()) {
+                    return false;
+                } else {
+                    st.pop();
                 }
-            } catch (Exception e) {
-                return false;
             }
         }
         return st.empty();
