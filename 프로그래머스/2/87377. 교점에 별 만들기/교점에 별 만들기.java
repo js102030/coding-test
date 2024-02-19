@@ -1,8 +1,9 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 class Solution {
     public String[] solution(int[][] line) {
-
         List<Point> points = new ArrayList<>();
         for (int i = 0; i < line.length; i++) {
             for (int j = i + 1; j < line.length; j++) {
@@ -30,7 +31,7 @@ class Solution {
             int y = (int) (maximum.y - p.y);
             arr[y][x] = '*';
         }
-        
+
         String[] result = new String[arr.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = new String(arr[i]);
