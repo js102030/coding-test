@@ -1,16 +1,21 @@
 class Solution {
-    public String solution(String s, int n) {
-        StringBuilder result = new StringBuilder();
-        n = n % 26;
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (Character.isLowerCase(ch)) {
-                ch = (char) ((ch - 'a' + n) % 26 + 'a');
-            } else if (Character.isUpperCase(ch)) {
-                ch = (char) ((ch - 'A' + n) % 26 + 'A');
+    public static String solution(String s, int n) {
+        char[] charArray = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for (char c : charArray) {
+            if (65 <= c && c <= 90) {
+                c += (char) n;
+                if (90 < c) {
+                    c = (char) (c % 90 + 64);
+                }
+            } else if (97 <= c && c <= 122) {
+                c += (char) n;
+                if (122 < c) {
+                    c = (char) (c % 122 + 96);
+                }
             }
-            result.append(ch);
+            sb.append(c);
         }
-        return result.toString();
+        return sb.toString();
     }
 }
