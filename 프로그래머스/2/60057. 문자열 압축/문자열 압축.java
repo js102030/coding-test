@@ -2,55 +2,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    private List<String> split(String source, int length) {
+    public static int solution(String s) {
+
+        int min = Integer.MAX_VALUE;
+
+        for (int length = 1; length <= s.length(); length++) {
 
             List<String> tokens = new ArrayList<>();
-
-            for (int startIndex = 0; startIndex < source.length(); startIndex += length) {
+            for (int startIndex = 0; startIndex < s.length(); startIndex += length) {
 
                 int endIndex = startIndex + length;
-                if (source.length() < endIndex) {
-                    endIndex = source.length();
+                if (s.length() < endIndex) {
+                    endIndex = s.length();
                 }
-                tokens.add(source.substring(startIndex, endIndex));
+                tokens.add(s.substring(startIndex, endIndex));
             }
 
-            return tokens;
+            int compressed = compress(tokens);
+
+            if (compressed < min) {
+                min = compressed;
+            }
         }
+        return min;
+    }
 
-        private int compress(String source, int length) {
-            StringBuilder sb = new StringBuilder();
+    private static int compress(List<String> tokens) {
+        StringBuilder sb = new StringBuilder();
+        String last = "";
+        int count = 0;
 
-            String last = "";
-            int count = 0;
-            for (String token : split(source, length)) {
-                if (token.equals(last)) {
-                    count++;
-                } else {
-                    if (count > 1) {
-                        sb.append(count);
-                    }
-                    sb.append(last);
-                    last = token;
-                    count = 1;
+        for (String token : tokens) {
+            if (token.equals(last)) {
+                count++;
+            } else {
+                if (count > 1) {
+                    sb.append(count);
                 }
+                sb.append(last);
+                last = token;
+                count = 1;
             }
-            if (count > 1){
-                sb.append(count);
-            }
-            sb.append(last);
-
-            return sb.length();
         }
-
-        public int solution(String s) {
-            int min = Integer.MAX_VALUE;
-            for (int length = 1; length <= s.length(); length++) {
-                int compressed = compress(s, length);
-                if (compressed < min) {
-                    min = compressed;
-                }
-            }
-            return min;
+        if (count > 1) {
+            sb.append(count);
         }
+        sb.append(last);
+
+        return sb.length();
+    }
 }
