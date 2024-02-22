@@ -1,20 +1,20 @@
 import java.util.ArrayList;
+import java.util.List;
 class Solution {
-    public static ArrayList<int[]> list = new ArrayList<>();
-
     public static int[][] solution(int n) {
-        int[][] answer = {};
-        hanoi(1, 2, 3, n);
-        return list.toArray(new int[0][]);
+        List<int[]> array = new ArrayList<>();
+        hanoi(1, 2, 3, n, array);
+        return array.toArray(new int[0][]);
     }
 
-    public static void hanoi(int start, int via, int end, int n) {
+    public static void hanoi(int start, int via, int end, int n, List<int[]> arr) {
         if (n == 1) {
-            list.add(new int[]{start, end});
+            arr.add(new int[]{start, end});
             return;
         }
-        hanoi(start, end, via, n - 1);
-        list.add(new int[]{start, end});
-        hanoi(via, start, end, n - 1);
+
+        hanoi(start, end, via, n - 1, arr);
+        arr.add(new int[]{start, end});
+        hanoi(via, start, end, n - 1, arr);
     }
 }
