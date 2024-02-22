@@ -1,23 +1,13 @@
 class Solution {
-    private final class Count {
-        private final int zero;
-        private final int one;
-
-        private Count(int zero, int one) {
-            this.zero = zero;
-            this.one = one;
-        }
-    
-        public Count add(Count other) {
-            return new Count(zero + other.zero, one + other.one);
-        }
-
+    public int[] solution(int[][] arr) {
+        Count count = count(0, 0, arr.length, arr);
+        return new int[] {count.zero, count.one};
     }
 
     private Count count(int offsetX, int offsetY, int size, int[][] arr) {
         int h = size / 2;
-        for (int y = offsetY; y < offsetY + size; y++) {
-            for (int x = offsetX; x < offsetX + size; x++) {
+        for (int x = offsetX; x < offsetX + size; x++) {
+            for (int y = offsetY; y < offsetY + size; y++) {
                 if (arr[y][x] != arr[offsetY][offsetX]) {
                     return count(offsetX, offsetY, h, arr)
                             .add(count(offsetX + h, offsetY, h, arr))
@@ -33,8 +23,17 @@ class Solution {
         return new Count(1, 0);
     }
 
-    public int[] solution(int[][] arr) {
-        Count count = count(0, 0, arr.length, arr);
-        return new int[]{count.zero, count.one};
+    private static class Count {
+        public final int zero;
+        public final int one;
+
+        public Count(int zero, int one) {
+            this.zero = zero;
+            this.one = one;
+        }
+
+        public Count add(Count other) {
+            return new Count(zero + other.zero, one + other.one);
+        }
     }
 }
