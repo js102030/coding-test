@@ -1,15 +1,14 @@
 class Solution {
     boolean solution(String s) {
         char[] charArray = s.toCharArray();
-        int countP = 0;
-        int countY = 0;
+        int pCount = 0;
+        int yCount = 0;
         for (char c : charArray) {
-            switch (c){
-                case 'p', 'P' -> ++countP;
-                case 'y', 'Y' -> ++countY;
+            switch (Character.toUpperCase(c)) {
+                case 'P' -> pCount++;
+                case 'Y' -> yCount++;
             }
         }
-
-        return countP == countY;
+        return pCount == yCount;
     }
 }
