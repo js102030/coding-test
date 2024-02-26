@@ -7,7 +7,7 @@ FROM
 JOIN
     OFFLINE_SALE o ON p.PRODUCT_ID = o.PRODUCT_ID
 GROUP BY
-    p.PRODUCT_CODE
+    pc
 ORDER BY
     s desc,
     pc asc;
