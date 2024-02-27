@@ -1,14 +1,16 @@
 class Solution {
     public int[] solution(int brown, int yellow) {
-        for (int w = 3; w <= 2500; w++) {
-            for (int h = 3; h <= w; h++) {
-                int boundary = (w + h - 2) * 2;
-                int center = w * h - boundary;
-                if (brown == boundary && yellow == center) {
-                    return new int[]{w, h};
+        int[] answer = {};
+
+        for (int width = 3; width <= 5000; width++) {
+            for (int height = 1; height <= width; height++) {
+                if (yellow == (width - 2) * (height - 2)) {
+                    if (brown == (width * 2 + height * 2 - 4)) {
+                        answer = new int[] {width,height};
+                    }
                 }
             }
         }
-        return null;
+        return answer;
     }
 }
