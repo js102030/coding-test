@@ -1,22 +1,32 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class Solution {
     private static final char[] chars = "AEIOU".toCharArray();
 
-    private static void generate(String s, ArrayList<String> words) {
-        words.add(s);
+    public int solution(String word) {
+
+        List<String> arr = new ArrayList<>();
+
+        addChars("", arr);
+
+        return arr.indexOf(word);
+        
+    }
+
+    private void addChars(String s, List<String> arr) {
+        arr.add(s);
 
         if (s.length() == 5) {
             return;
         }
+
         for (char c : chars) {
-            generate(s + c, words);
+            addChars(s + c, arr);
         }
     }
-
-    public static int solution(String word) {
-        ArrayList<String> words = new ArrayList<>();
-        generate("", words);
-        return words.indexOf(word);
-    }
+    
+    
+    
+    
 }
