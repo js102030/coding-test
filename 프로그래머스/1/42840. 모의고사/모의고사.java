@@ -1,34 +1,56 @@
-import java.util.ArrayList;
 class Solution {
-    private static final int[][] SUPOS = {
+    public static int[][] arr = {
             {1, 2, 3, 4, 5},
             {2, 1, 2, 3, 2, 4, 2, 5},
-            {3, 3, 1, 1, 2, 2, 4, 4, 5, 5},
-    };
-    private static final int[] counts = new int[3];
+            {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}};
 
-    public static int[] solution(int[] answers) {
+    public int[] solution(int[] answers) {
 
-        int index;
-        int idx = 0;
-        for (int answer : answers) {
-            for (int k = 0; k < SUPOS.length; k++) {
-                index = idx % SUPOS[k].length;
-                if (answer == SUPOS[k][index]) {
-                    ++counts[k];
-                }
+        int a = 0;
+        int b = 0;
+        int c = 0;
+
+        int indexA = 0;
+        int indexB = 0;
+        int indexC = 0;
+        for (int i : answers) {
+
+            int[] arrA = arr[0];
+            int[] arrB = arr[1];
+            int[] arrC = arr[2];
+
+            indexA %= arrA.length;
+            indexB %= arrB.length;
+            indexC %= arrC.length;
+
+            if (arrA[indexA++] == i) {
+                a++;
             }
-            ++idx;
-        }
-        int max = Math.max(Math.max(counts[0], counts[1]), counts[2]);
-
-        ArrayList<Integer> result = new ArrayList<>();
-        for (int j = 0; j < counts.length; j++) {
-            if (max == counts[j]) {
-                result.add(j + 1);
+            if (arrB[indexB++] == i) {
+                b++;
+            }
+            if (arrC[indexC++] == i) {
+                c++;
             }
         }
-        return result.stream().mapToInt(i -> i).toArray();
+
+        int max = Math.max(Math.max(a, b), c);
+        boolean[] isMax = {max == a, max == b, max == c};
+        int count = 0;
+
+        for (boolean value : isMax) {
+            if (value) count++;
+        }
+
+        int[] result = new int[count];
+        int index = 0;
+
+        for (int i = 0; i < isMax.length; i++) {
+            if (isMax[i]) {
+                result[index++] = i + 1; // 1, 2, 3 중 어떤 것이 최대값인지를 나타냅니다.
+            }
+        }
+
+        return result;
     }
-    
 }
